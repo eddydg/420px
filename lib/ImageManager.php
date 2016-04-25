@@ -9,6 +9,14 @@ class ImageManager {
         $this->db = $db;
     }
 
+    public function getImage($imageId) {
+        $req = $this->db->prepare(
+            "SELECT * FROM Image WHERE id = ?");
+        $req->execute(array($imageId));
+
+        return $req->fetch();
+    }
+
     public function getImages($userId = 0) {
 
         if ($userId == 0) {
@@ -26,6 +34,22 @@ class ImageManager {
     {
         $req = $this->db->prepare("INSERT INTO image (user_id, name) VALUES (?, ?)");
         return $req->execute(array($userId, $imageName));
+    }
+
+    public function deleteImage($imageId, $connectedUserId)
+    {
+        $image = $this->getImage($imageId);
+        if ($image->user_id == $connectedUserId) {
+            $req = $this->db->prepare("DELETE FROM image WHERE id = ?");
+            if ($req->execute(array($imageId))) {
+                unlink(IMG_TARGET_FOLDER . $image->name);
+            }
+            return false;
+        } else {
+            var_dump("Seul le propriétaire peut faire cette action");
+            return false;
+        }
+
     }
 
     public function uploadImage($file, $userId)

@@ -6,8 +6,9 @@ require_once("lib/ImageManager.php");
 session_start();
 var_dump($_SESSION);
 
-$Auth = new Auth(Database::getDB());
-$ImageManager = new ImageManager(Database::getDB());
+$db = Database::getDB();
+$Auth = new Auth($db);
+$ImageManager = new ImageManager($db);
 
 $page = "home";
 if (isset($_GET["p"])) {
