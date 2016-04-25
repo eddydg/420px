@@ -22,7 +22,6 @@ class Auth {
 
     public function login($email, $password) {
         $hashed_pass = hash(HASH_TYPE, $password);
-        $email = mysqli_real_escape_string($email);
 
         $req = $this->db->prepare(
             "SELECT * FROM User WHERE email = ? and password = ?");
@@ -53,7 +52,6 @@ class Auth {
         $req = $this->db->prepare("INSERT INTO user (email, password) VALUES (?, ?)");
 
         $hashed_pass = hash(HASH_TYPE, $password);
-        $email = mysqli_real_escape_string($email);
 
         if ($req->execute(array($email, $hashed_pass))) {
             $this->login($email, $password);

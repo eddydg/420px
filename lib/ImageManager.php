@@ -20,13 +20,13 @@ class ImageManager {
     public function getImages($userId = 0) {
 
         if ($userId == 0) {
-            return $this->db->query("SELECT * FROM Image");
+            return $this->db->query("SELECT * FROM Image")->fetchAll();
         } else {
             $req = $this->db->prepare(
                 "SELECT * FROM Image WHERE user_id = ?");
             $req->execute(array($userId));
 
-            return $req->fetch();
+            return $req->fetchAll();
         }
     }
 
@@ -43,6 +43,7 @@ class ImageManager {
             $req = $this->db->prepare("DELETE FROM image WHERE id = ?");
             if ($req->execute(array($imageId))) {
                 unlink(IMG_TARGET_FOLDER . $image->name);
+                return true;
             }
             return false;
         } else {
@@ -72,6 +73,8 @@ class ImageManager {
                 $filename = md5(uniqid()) .'.'. $extension;
 
                 if (move_uploaded_file($file['tmp_name'], IMG_TARGET_FOLDER . $filename)) {
+                    $fittedImage = new abeautifulsite\SimpleImage(IMG_TARGET_FOLDER . $filename);
+                    $fittedImage->resize(420, 420)->save();
                     $this->insertImage($filename, $userId);
                     $message = 'Upload réussi !';
                 }

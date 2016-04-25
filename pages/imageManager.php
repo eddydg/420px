@@ -10,12 +10,11 @@ else if (isset($_GET['delete_image'])) {
     else
         $message = "Vous n'êtes pas autorisé à supprimer cette image.";
 }
-
-var_dump($message);
-
-
-
 ?>
+
+<pre>
+    <?php echo $message; ?>
+</pre>
 
 <div id="content">
     <form class="" method="post" enctype="multipart/form-data">
@@ -25,7 +24,7 @@ var_dump($message);
 </div>
 
 <?php foreach ($ImageManager->getImages() as $image): ?>
-    <?php var_dump($image); ?>
     <img src="<?php echo IMG_TARGET_FOLDER . $image->name; ?>" alt="" />
     <a href="?p=imageManager&amp;delete_image=<?php echo $image->id; ?>">Supprimer</a>
+    <br>
 <?php endforeach; ?>

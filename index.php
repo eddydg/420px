@@ -3,6 +3,8 @@ require_once("config.php");
 require_once("lib/Database.php");
 require_once("lib/Auth.php");
 require_once("lib/ImageManager.php");
+require_once("lib/SimpleImage.php");
+
 session_start();
 var_dump($_SESSION);
 
@@ -12,19 +14,27 @@ $ImageManager = new ImageManager($db);
 
 $page = "home";
 if (isset($_GET["p"])) {
-    if  (file_exists("pages/" . $_GET["p"] . ".php"))
-    $page = $_GET["p"];
+    if  (file_exists("pages/" . $_GET["p"] . ".php")) {
+        $page = $_GET["p"];
+
+        if ($page == "imageManager" && !$Auth->isLogged())
+            header('Location: index.php');
+        elseif ($page = "rssFeed")
+            header('Location: rssFeed.php');
+    }
+
     else
         $page = "404";
 }
 
 
+
 if ($Auth->isLogged()) {
     if ($page == "login")
         header('Location: index.php');
-    echo "yo";
+    echo "Vous êtes connecté";
 } else {
-    echo "nop";
+    echo "Vous n'êtes pas connecté";
 }
 
 ?>
