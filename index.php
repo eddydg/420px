@@ -2,10 +2,12 @@
 require_once("config.php");
 require_once("lib/Database.php");
 require_once("lib/Auth.php");
+require_once("lib/ImageManager.php");
 session_start();
 var_dump($_SESSION);
 
 $Auth = new Auth(Database::getDB());
+$ImageManager = new ImageManager(Database::getDB());
 
 $page = "home";
 if (isset($_GET["p"])) {
@@ -17,6 +19,8 @@ if (isset($_GET["p"])) {
 
 
 if ($Auth->isLogged()) {
+    if ($page == "login")
+        header('Location: index.php');
     echo "yo";
 } else {
     echo "nop";
@@ -38,6 +42,7 @@ if ($Auth->isLogged()) {
                 <a href="?p=login">Se connecter</a>
                 <a href="?p=register">Créer un compte</a>
             <?php endif; ?>
+            <a href="?p=imageManager">Images</a>
         </nav>
         <div id="page">
             <?php include_once("pages/" . $page . ".php"); ?>

@@ -29,6 +29,7 @@ class Auth {
 
         if ($result = $req->fetch()) {
             $_SESSION['Auth'] = array(
+                'userId' => $result->id,
                 'login' => $email,
                 'password' => $hashed_pass
             );
