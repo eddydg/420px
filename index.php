@@ -25,9 +25,9 @@ if (isset($_GET["p"])) {
         header('Location: rssFeed.php');
         exit();
     }
-    elseif ($page == "login" && $isLogged) {
-        header('Location: index.php');
-    }
+    // elseif ($page == "login" && $isLogged) {
+    //     header('Location: index.php');
+    // }
     elseif  (file_exists("pages/" . $_GET["p"] . ".php")) {
 
         if ($page == "imageManager" && !$isLogged)
@@ -44,6 +44,7 @@ if (isset($_GET["p"])) {
     <meta charset="utf-8">
     <title>420px</title>
     <!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
     <link rel="stylesheet" href="//bootswatch.com/darkly/bootstrap.min.css">
     <link rel="stylesheet" href="//blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
     <link rel="stylesheet" href="public/css/bootstrap-image-gallery.min.css">
@@ -59,23 +60,6 @@ if (isset($_GET["p"])) {
         <!-- Debug Info -->
         <!-- <h3>Session</h3> -->
         <?php //var_dump($_SESSION); ?>
-
-        <?php if ($messageError != "" || $messageWarning != "" || $messageSuccess != "" || $messageInfo != ""): ?>
-            <h3>Infos</h3>
-
-            <?php if ($messageError != "") {
-                echo "<div class='alert alert-danger' role='alert'>$messageError</div>";
-            } ?>
-            <?php if ($messageWarning != "") {
-                echo "<div class='alert alert-warning' role='alert'>$messageWarning</div>";
-            } ?>
-            <?php if ($messageSuccess != "") {
-                echo "<div class='alert alert-success' role='alert'>$messageSuccess</div>";
-            } ?>
-            <?php if ($messageInfo != "") {
-                echo "<div class='alert alert-info' role='alert'>$messageInfo</div>";
-            } ?>
-        <?php endif; ?>
 
         <!-- Main Content -->
         <div id="page">
@@ -116,8 +100,20 @@ if (isset($_GET["p"])) {
             </div>
         </div>
 
+
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
         <script src="public/js/bootstrap-image-gallery.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+        <script type="text/javascript">
+            <?php if ($messageError != "") {
+                echo "toastr.error('$messageError');"; } ?>
+            <?php if ($messageWarning != "") {
+                echo "toastr.warning('$messageWarning');"; } ?>
+            <?php if ($messageSuccess != "") {
+                echo "toastr.success('$messageSuccess');"; } ?>
+            <?php if ($messageInfo != "") {
+                echo "toastr.info('$messageInfo');"; } ?>
+        </script>
     </body>
 </html>

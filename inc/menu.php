@@ -16,7 +16,7 @@
                 <?php else: ?>
                     <?php include_once("pages/login.php"); ?>
                     <!--<li><a href="?p=login">Se connecter</a></li>-->
-                    <li><a href="?p=register">Créer un compte</a></li>
+                    <!-- <li><a href="?p=register">Créer un compte</a></li> -->
                 <?php endif; ?>
             </ul>
         </div>
