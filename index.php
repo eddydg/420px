@@ -14,19 +14,20 @@ $ImageManager = new ImageManager($db);
 
 $page = "home";
 if (isset($_GET["p"])) {
-    if  (file_exists("pages/" . $_GET["p"] . ".php")) {
-        $page = $_GET["p"];
+    $page = $_GET["p"];
+
+    if ($page == "rssFeed") {
+        header('Location: rssFeed.php');
+        exit();
+    }
+    elseif  (file_exists("pages/" . $_GET["p"] . ".php")) {
 
         if ($page == "imageManager" && !$Auth->isLogged())
             header('Location: index.php');
-        elseif ($page = "rssFeed")
-            header('Location: rssFeed.php');
     }
-
     else
         $page = "404";
 }
-
 
 
 if ($Auth->isLogged()) {
@@ -54,6 +55,7 @@ if ($Auth->isLogged()) {
                 <a href="?p=register">Créer un compte</a>
             <?php endif; ?>
             <a href="?p=imageManager">Images</a>
+            <a href="?p=rssFeed">Flux RSS</a>
         </nav>
         <div id="page">
             <?php include_once("pages/" . $page . ".php"); ?>

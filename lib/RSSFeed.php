@@ -3,14 +3,12 @@
 class RSSFeed {
 
     public static function getFeed($images) {
-        $result = "<xml version='1.0' encoding='UTF-8' ?>";
+        $result = "<?xml version='1.0' encoding='UTF-8'?>";
         $result .= "<rss version='2.0'>";
         $result .= "<channel>";
-
         $result .= "<title>420px</title>";
-        var_dump($images);
+
         foreach ($images as $image) {
-            var_dump($image);
             $result .= "<item>";
 
             $result .= "<title>" . $image->name . "</title>";
