@@ -1,30 +1,33 @@
 <?php
 
-$message = "";
 if (isset($_FILES) && isset($_FILES['image'])) {
-    $message = $ImageManager->uploadImage($_FILES['image'], $_SESSION['Auth']['userId']);
+    $messageInfo = $ImageManager->uploadImage($_FILES['image'], $_SESSION['Auth']['userId']);
 }
 else if (isset($_GET['delete_image'])) {
     if ($ImageManager->deleteImage($_GET['delete_image'], $_SESSION['Auth']['userId']))
-        $message = "L'image a été supprimée.";
+        $messageSuccess = "L'image a été supprimée.";
     else
-        $message = "Vous n'êtes pas autorisé à supprimer cette image.";
+        $messageError = "Vous n'êtes pas autorisé à supprimer cette image.";
 }
 ?>
-
-<pre>
-    <?php echo $message; ?>
-</pre>
 
 <div id="content">
     <form class="" method="post" enctype="multipart/form-data">
         <input type="file" name="image" value="">
-        <input type="submit" name="submit" value="Envoyer">
+        <button type="submit" class="btn btn-primary">Envoyer</button>
     </form>
 </div>
 
-<?php foreach ($ImageManager->getImages() as $image): ?>
-    <img src="<?php echo IMG_TARGET_FOLDER . $image->name; ?>" alt="" />
-    <a href="?p=imageManager&amp;delete_image=<?php echo $image->id; ?>">Supprimer</a>
-    <br>
-<?php endforeach; ?>
+<div class="image-gallery" id="links">
+
+    <?php foreach ($ImageManager->getImages() as $image): ?>
+
+    <div class="image-box">
+        <a href="<?php echo IMG_TARGET_FOLDER . $image->name; ?>" title="" data-gallery>
+            <img src="<?php echo IMG_TARGET_FOLDER . $image->name; ?>" alt=""><br>
+            <a href="?p=imageManager&amp;delete_image=<?php echo $image->id; ?>">Supprimer</a>
+        </a>
+    </div>
+
+    <?php endforeach; ?>
+</div>

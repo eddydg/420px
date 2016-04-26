@@ -1,0 +1,27 @@
+body {
+    width: 1350px;
+    margin-left:auto;
+    margin-right:auto;
+    
+    margin-top: 80px;
+    background-color: #2F2F2F;
+    color: white;
+}
+
+#page {
+
+}
+
+.image-gallery {
+
+}
+.image-gallery .image-box {
+    display: inline-block;
+    padding: 5px;
+    margin: 5px;
+    background-color: #212121;
+
+}
+.image-gallery .image-box img {
+
+}

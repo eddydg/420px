@@ -1,6 +1,6 @@
 <div id="content">
     <?php if ($Auth->isLogged()): ?>
-        <h2>Bienvenue <b><?php echo $_SESSION['Auth']['login']; ?><b> !</h2>
+        <h2>Bienvenue <b><?php echo htmlspecialchars($_SESSION['Auth']['login']); ?><b> !</h2>
     <?php endif; ?>
     <br>
     <?php foreach ($ImageManager->getImages() as $image): ?>

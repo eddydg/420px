@@ -57,7 +57,6 @@ class ImageManager {
     {
         $message = "";
         $filename = "";
-        var_dump($file);
         $extension  = pathinfo($file['name'], PATHINFO_EXTENSION);
 
         if (in_array(strtolower($extension), ImageManager::$allow_ext))
@@ -93,7 +92,7 @@ class ImageManager {
         else
           $message = 'L\'extension du fichier est incorrecte !';
 
-        return $filename;
+        return $message;
     }
 
 

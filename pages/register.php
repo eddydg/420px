@@ -15,6 +15,6 @@ if (isset($_POST["user_name"]) && isset($_POST["user_password"])) {
     <form method="post">
         <input type="input" name="user_name">
         <input type="input" name="user_password">
-        <input type="submit" value="S'inscrire">
+        <button type="submit" class="btn btn-primary">S'inscrire</button>
     </form>
 </div>
