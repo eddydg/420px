@@ -2,7 +2,7 @@ body {
     width: 1350px;
     margin-left:auto;
     margin-right:auto;
-    
+
     margin-top: 80px;
     background-color: #2F2F2F;
     color: white;
@@ -20,8 +20,16 @@ body {
     padding: 5px;
     margin: 5px;
     background-color: #212121;
-
 }
-.image-gallery .image-box img {
 
+.image-gallery .image-box:hover {
+  transition: 0.5s;
+  width: 420px;
+  height: 420px;
+  -webkit-box-shadow:inset 0px 0px 85px rgba(0,0,0,.5);
+}
+
+.image-gallery .image-box img {
+  z-index: -1;
+  position: relative;
 }

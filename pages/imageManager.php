@@ -5,7 +5,7 @@ $currentUserId = 0;
 if (isset($_GET['user'])) {
   $currentUserId = $_GET['user'];
 } elseif ($isLogged) {
-  $currentUserId = $_SESSION['Auth']['id'];
+  $currentUserId = $_SESSION['Auth']['userId'];
 } else {
   die();
 }
