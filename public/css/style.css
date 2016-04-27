@@ -2,9 +2,11 @@ body {
     width: 1350px;
     margin-left:auto;
     margin-right:auto;
+    font-family: 'Montserrat', "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
     margin-top: 80px;
-    background-color: #2F2F2F;
+    /*background-color: #2F2F2F;*/
+    background-color: #191919;
     color: white;
 }
 
@@ -13,23 +15,93 @@ body {
 }
 
 .image-gallery {
-
+    margin-top: 10px;
+    text-align: center;
+    /*background-color:  #202020;*/
 }
+
 .image-gallery .image-box {
+    width: 430px;
+    height: 500px;
+    margin: 5px 5px;
+    padding: 5px 5px;
+    position: relative;
     display: inline-block;
-    padding: 5px;
-    margin: 5px;
-    background-color: #212121;
+    border-radius: 2px;
+    box-shadow: 2px 2px 3px rgba(0,0,0,0.28);
+
+    background-color: #2F2F31;
 }
 
-.image-gallery .image-box:hover {
-  transition: 0.5s;
-  width: 420px;
-  height: 420px;
-  -webkit-box-shadow:inset 0px 0px 85px rgba(0,0,0,.5);
+/*.image-gallery .image-box:hover {
+  transition: 0.2s;
+  -webkit-box-shadow:inset 0px 0px 90px rgba(0,0,0,.8);
+  z-index: -2;
+}*/
+
+.image-gallery .image-box:after {
+    content: '';
+    display: block;
+    position: absolute;
+    opacity: 0;
+    top: 5px;
+    width: 420px;
+    height: 420px;
+    transition: 0.2s;
+    -webkit-box-shadow:inset 0px 0px 90px rgba(0,0,0,.8);
+    z-index: 10;
 }
 
-.image-gallery .image-box img {
-  z-index: -1;
-  position: relative;
+.image-gallery .image-box:hover:after {
+    opacity: 1;
+}
+
+/*.image-gallery .image-box img {
+    position: relative;
+}*/
+
+.image-box .delete-image-btn {
+    color: white;
+    font-size: 1.5em;
+
+    position: absolute;
+    bottom: 75px;
+    left: 5px;
+    right: -5px;
+    height: 40px;
+
+    background-color: rgba(0, 0, 0, 0.2);
+    width: 420px;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.2s linear;
+}
+
+.image-box:hover .delete-image-btn {
+    text-decoration: none;
+    visibility: visible;
+    opacity: 1;
+    z-index: 20;
+}
+
+.delete-image-btn:hover {
+    background-color: rgba(150, 0, 0, 0.8);
+}
+
+.image-box .details {
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+    text-align: left;
+    color: #999;
+}
+
+.image-box .details-user-name {
+    text-transform: capitalize;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #ccc;
+}
+
+.close {
+    margin-right: 100px;
 }

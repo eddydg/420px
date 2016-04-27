@@ -45,6 +45,8 @@ if (isset($_GET["p"])) {
     <link rel="stylesheet" href="//bootswatch.com/darkly/bootstrap.min.css">
     <link rel="stylesheet" href="//blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
     <link rel="stylesheet" href="public/css/bootstrap-image-gallery.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="public/css/fileinput.min.css">
     <link rel="stylesheet" href="public/css/style.css">
     </head>
     <body>
@@ -101,6 +103,7 @@ if (isset($_GET["p"])) {
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
         <script src="public/js/bootstrap-image-gallery.min.js"></script>
+        <script src="public/js/fileinput.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
         <script type="text/javascript">
             <?php if ($messageError != "") {

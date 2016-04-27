@@ -23,8 +23,11 @@ else if (isset($_GET['delete_image'])) {
 
 <div id="content">
     <form class="" method="post" enctype="multipart/form-data">
-        <input type="file" name="image" value="">
-        <button type="submit" class="btn btn-primary">Envoyer</button>
+        <div class="form-group" style="margin: auto; width: 600px; text-align: center;">
+            <label class="control-label">Select File</label>
+            <input type="file" name="image" class="form-control file" data-allowed-file-extensions='["jpg", "jpeg", "gif", "png"]'>
+            <!-- <button type="submit" class="btn btn-primary form-control">Envoyer</button> -->
+        </div>
     </form>
 </div>
 
@@ -36,9 +39,13 @@ else if (isset($_GET['delete_image'])) {
         <a href="<?php echo IMG_TARGET_FOLDER . $image->name; ?>" title="" data-gallery>
             <img src="<?php echo IMG_TARGET_FOLDER . $image->name; ?>" alt=""><br>
             <?php if ($isLogged): ?>
-                <a href="?p=imageManager&amp;delete_image=<?php echo $image->id; ?>">Supprimer</a>
+                <a class="delete-image-btn" href="?p=imageManager&amp;delete_image=<?php echo $image->id; ?>">Supprimer</a>
             <?php endif; ?>
         </a>
+        <div class="details">
+            <span class="details-user-name"><?php echo htmlspecialchars($image->username); ?></span><br>
+            <!-- <span class="details-image-name"><?php echo htmlspecialchars($image->name); ?></span> -->
+        </div>
     </div>
 
     <?php endforeach; ?>

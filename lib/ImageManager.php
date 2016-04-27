@@ -11,7 +11,7 @@ class ImageManager {
 
     public function getImage($imageId) {
         $req = $this->db->prepare(
-            "SELECT * FROM Image WHERE id = ?");
+            "SELECT image.id as id, user_id, name, email as username FROM image INNER JOIN user ON user.id = image.user_id WHERE image.id = ?");
         $req->execute(array($imageId));
 
         return $req->fetch();
@@ -20,10 +20,13 @@ class ImageManager {
     public function getImages($userId = 0) {
 
         if ($userId == 0) {
-            return $this->db->query("SELECT * FROM Image")->fetchAll();
+            return $this->db
+                ->query(
+                    "SELECT image.id as id, user_id, name, email as username FROM image INNER JOIN user ON user.id = image.user_id")
+                ->fetchAll();
         } else {
             $req = $this->db->prepare(
-                "SELECT * FROM Image WHERE user_id = ?");
+                "SELECT image.id as id, user_id, name, email as username FROM image INNER JOIN user ON user.id = image.user_id WHERE image.user_id = ?");
             $req->execute(array($userId));
 
             return $req->fetchAll();
@@ -39,7 +42,9 @@ class ImageManager {
     public function deleteImage($imageId, $connectedUserId)
     {
         $image = $this->getImage($imageId);
-        if ($image->user_id == $connectedUserId) {
+        if ($image == NULL) {
+            return false;
+        } elseif ($image->user_id == $connectedUserId) {
             $req = $this->db->prepare("DELETE FROM image WHERE id = ?");
             if ($req->execute(array($imageId))) {
                 unlink(IMG_TARGET_FOLDER . $image->name);
