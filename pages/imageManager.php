@@ -1,5 +1,15 @@
 <?php
 
+$currentUserId = 0;
+
+if (isset($_GET['user'])) {
+  $currentUserId = $_GET['user'];
+} elseif ($isLogged) {
+  $currentUserId = $_SESSION['Auth']['id'];
+} else {
+  die();
+}
+
 if (isset($_FILES) && isset($_FILES['image'])) {
     $messageInfo = $ImageManager->uploadImage($_FILES['image'], $_SESSION['Auth']['userId']);
 }
@@ -20,12 +30,14 @@ else if (isset($_GET['delete_image'])) {
 
 <div class="image-gallery" id="links">
 
-    <?php foreach ($ImageManager->getImages() as $image): ?>
+    <?php foreach ($ImageManager->getImages($currentUserId) as $image): ?>
 
     <div class="image-box">
         <a href="<?php echo IMG_TARGET_FOLDER . $image->name; ?>" title="" data-gallery>
             <img src="<?php echo IMG_TARGET_FOLDER . $image->name; ?>" alt=""><br>
-            <a href="?p=imageManager&amp;delete_image=<?php echo $image->id; ?>">Supprimer</a>
+            <?php if ($isLogged): ?>
+                <a href="?p=imageManager&amp;delete_image=<?php echo $image->id; ?>">Supprimer</a>
+            <?php endif; ?>
         </a>
     </div>
 

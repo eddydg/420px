@@ -25,20 +25,13 @@ if (isset($_GET["p"])) {
         header('Location: rssFeed.php');
         exit();
     }
-    elseif ($page == "imageManager") {
-        if (!$isLogged) {
-            header('Location: index.php');
-            exit();
-        } else {
-            $page = "imageManager";
-        }
-    }
     elseif ($page == "logout") {
         header('Location: pages/logout.php');
         exit();
     }
-    else
-        $page = "404";
+    elseif  (!file_exists("pages/" . $_GET["p"] . ".php")) {
+      $page = "404";
+    }
 }
 ?>
 

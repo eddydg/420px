@@ -11,7 +11,7 @@ class Database {
             $PDO->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE,PDO::FETCH_OBJ);
             return $PDO;
         } catch (PDOException $e) {
-            echo "Connexion impossible à la base de données";
+            die("Connexion impossible à la base de données");
         }
     }
 }

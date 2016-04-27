@@ -2,7 +2,7 @@
 
 define("DB_TYPE", "mysql");
 define("DB_SERVER", "localhost");
-define("DB_DATABASE", "402px");
+define("DB_DATABASE", "420px");
 define("DB_USERNAME", "root");
 define("DB_PASSWORD", "");
 

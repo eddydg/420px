@@ -1,9 +1,17 @@
 <div id="content">
     <?php if ($Auth->isLogged()): ?>
         <h2>Bienvenue <b><?php echo htmlspecialchars($_SESSION['Auth']['login']); ?><b> !</h2>
+        <br>
     <?php endif; ?>
-    <br>
-    <?php foreach ($ImageManager->getImages() as $image): ?>
-        <img src="<?php echo IMG_TARGET_FOLDER . $image->name; ?>" alt="" />
-    <?php endforeach; ?>
+    <?php
+    $allImages = $ImageManager->getImages();
+    if (count($allImages) > 0) {
+      foreach ($allImages as $image) {
+          echo "<img src='" . IMG_TARGET_FOLDER . $image->name . "' alt='' />";
+      }
+    } else {
+      echo "Aucune image n'a été publiée.";
+    }
+    ?>
+
 </div>
