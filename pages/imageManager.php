@@ -43,7 +43,11 @@ else if (isset($_GET['delete_image'])) {
             <?php endif; ?>
         </a>
         <div class="details">
-            <span class="details-user-name"><?php echo htmlspecialchars($image->username); ?></span><br>
+            <span class="details-user-name">
+                <a href="index.php?p=imageManager&amp;user=<?php echo $image->user_id; ?>">
+                    <?php echo htmlspecialchars($image->username); ?>
+                </a>
+            </span><br>
             <!-- <span class="details-image-name"><?php echo htmlspecialchars($image->name); ?></span> -->
         </div>
     </div>

@@ -7,11 +7,13 @@
         <div class="image-gallery">
         <?php foreach ($allImages as $image): ?>
             <div class="image-box">
-                <a href="index.php?p=imageManager&amp;user=<?php echo $image->user_id; ?>">
-                    <img src='<?php echo IMG_TARGET_FOLDER . $image->name; ?>' alt='' />
-                </a>
+                <img src='<?php echo IMG_TARGET_FOLDER . $image->name; ?>' alt='' />
                 <div class="details">
-                    <span class="details-user-name"><?php echo htmlspecialchars($image->username); ?></span><br>
+                    <span class="details-user-name">
+                        <a href="index.php?p=imageManager&amp;user=<?php echo $image->user_id; ?>">
+                            <?php echo htmlspecialchars($image->username); ?>
+                        </a>
+                    </span><br>
                     <!-- <span class="details-image-name"><?php echo htmlspecialchars($image->name); ?></span> -->
                 </div>
             </div>

@@ -10,52 +10,71 @@ class ImageManager {
     }
 
     public function getImage($imageId) {
-        $req = $this->db->prepare(
-            "SELECT image.id as id, user_id, name, email as username FROM image INNER JOIN user ON user.id = image.user_id WHERE image.id = ?");
-        $req->execute(array($imageId));
+        try {
+            $req = $this->db->prepare(
+                "SELECT image.id as id, user_id, name, email as username FROM image INNER JOIN user ON user.id = image.user_id WHERE image.id = ?");
+            $req->execute(array($imageId));
 
-        return $req->fetch();
+            return $req->fetch();
+        } catch (PDOException $e) {
+            echo "Database request failed: $e->getMesssage()";
+            exit();
+        }
     }
 
     public function getImages($userId = 0) {
+        try {
+            if ($userId == 0) {
+                return $this->db
+                    ->query(
+                        "SELECT image.id as id, user_id, name, email as username FROM image INNER JOIN user ON user.id = image.user_id")
+                    ->fetchAll();
+            } else {
+                $req = $this->db->prepare(
+                    "SELECT image.id as id, user_id, name, email as username FROM image INNER JOIN user ON user.id = image.user_id WHERE image.user_id = ?");
+                $req->execute(array($userId));
 
-        if ($userId == 0) {
-            return $this->db
-                ->query(
-                    "SELECT image.id as id, user_id, name, email as username FROM image INNER JOIN user ON user.id = image.user_id")
-                ->fetchAll();
-        } else {
-            $req = $this->db->prepare(
-                "SELECT image.id as id, user_id, name, email as username FROM image INNER JOIN user ON user.id = image.user_id WHERE image.user_id = ?");
-            $req->execute(array($userId));
-
-            return $req->fetchAll();
+                return $req->fetchAll();
+            }
+        } catch (PDOException $e) {
+            echo "Database request failed: $e->getMesssage()";
+            exit();
         }
+
     }
 
     public function insertImage($imageName, $userId)
     {
-        $req = $this->db->prepare("INSERT INTO image (user_id, name) VALUES (?, ?)");
-        return $req->execute(array($userId, $imageName));
+        try {
+            $req = $this->db->prepare("INSERT INTO image (user_id, name) VALUES (?, ?)");
+            return $req->execute(array($userId, $imageName));
+        } catch (PDOException $e) {
+            echo "Database request failed: $e->getMesssage()";
+            exit();
+        }
     }
 
     public function deleteImage($imageId, $connectedUserId)
     {
-        $image = $this->getImage($imageId);
-        if ($image == NULL) {
-            return false;
-        } elseif ($image->user_id == $connectedUserId) {
-            $req = $this->db->prepare("DELETE FROM image WHERE id = ?");
-            if ($req->execute(array($imageId))) {
-                unlink(IMG_TARGET_FOLDER . $image->name);
-                return true;
+        try {
+            $image = $this->getImage($imageId);
+            if ($image == NULL) {
+                return false;
+            } elseif ($image->user_id == $connectedUserId) {
+                $req = $this->db->prepare("DELETE FROM image WHERE id = ?");
+                if ($req->execute(array($imageId))) {
+                    unlink(IMG_TARGET_FOLDER . $image->name);
+                    return true;
+                }
+                return false;
+            } else {
+                var_dump("Seul le propriétaire peut faire cette action");
+                return false;
             }
-            return false;
-        } else {
-            var_dump("Seul le propriétaire peut faire cette action");
-            return false;
+        } catch (PDOException $e) {
+            echo "Database request failed: $e->getMesssage()";
+            exit();
         }
-
     }
 
     public function uploadImage($file, $userId)
@@ -99,7 +118,6 @@ class ImageManager {
 
         return $message;
     }
-
 
 }
 
