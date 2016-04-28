@@ -40,7 +40,8 @@ else if (isset($_GET['delete_image'])) {
             <img src="<?php echo IMG_TARGET_FOLDER . $image->name; ?>" alt="">
         </a>
         <?php if ($isLogged && $_SESSION['Auth']['userId'] == $image->user_id): ?>
-            <a class="delete-image-btn" href="?p=imageManager&amp;delete_image=<?php echo $image->id; ?>">Supprimer</a>
+            <a class="image-btn delete-image-btn" href="?p=imageManager&amp;delete_image=<?php echo $image->id; ?>">Supprimer</a>
+            <a class="image-btn edit-image-btn" href="?p=imageEditor&amp;edit_image=<?php echo $image->id; ?>">Modifier</a>
         <?php endif; ?>
 
         <div class="details">

@@ -4,14 +4,13 @@ body {
     margin-right:auto;
     font-family: 'Montserrat', "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
-    margin-top: 80px;
     /*background-color: #2F2F2F;*/
     background-color: #191919;
     color: white;
 }
 
 #page {
-
+    margin-top: 80px;
 }
 
 .image-gallery {
@@ -20,7 +19,7 @@ body {
     /*background-color:  #202020;*/
 }
 
-.image-gallery .image-box {
+.image-box {
     width: 430px;
     height: 500px;
     margin: 5px 5px;
@@ -58,24 +57,31 @@ body {
     cursor: crosshair;
 }*/
 
-.image-box .delete-image-btn {
+.image-box .image-btn {
     color: white;
     font-size: 1.5em;
 
-    position: absolute;
-    bottom: 75px;
     left: 5px;
     right: -5px;
-    height: 40px;
-
+    position: absolute;
     background-color: rgba(0, 0, 0, 0.2);
+
+    line-height: 40px;
+    height: 40px;
     width: 420px;
     visibility: hidden;
     opacity: 0;
     transition: visibility 0s, opacity 0.2s linear;
 }
 
-.image-box:hover .delete-image-btn {
+.image-box .delete-image-btn {
+    bottom: 75px;
+}
+.image-box .edit-image-btn {
+    top: 5px;
+}
+
+.image-box:hover .image-btn {
     text-decoration: none;
     visibility: visible;
     opacity: 1;
@@ -84,6 +90,9 @@ body {
 
 .delete-image-btn:hover {
     background-color: rgba(150, 0, 0, 0.8);
+}
+.edit-image-btn:hover {
+    background-color: rgba(0, 50, 130, 0.8);
 }
 
 .image-box .details {
@@ -111,4 +120,32 @@ body {
 .details a:hover {
     transition: 0.2s;
     color: white;
+}
+
+.editor {
+    position: relative;
+    margin-top: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.editor-image {
+    width: 430px;
+	border: solid 5px #2F2F31;
+    border-radius: 2px;
+    box-shadow: 2px 2px 3px rgba(0,0,0,0.28);
+}
+
+.editor-toolbar {
+    margin-left: 20px;
+}
+
+.editor-toolbar ul {
+    list-style-type: none;
+}
+
+.editor-toolbar-actions {
+    position: absolute;
+    bottom: 0;
 }

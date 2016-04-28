@@ -4,6 +4,7 @@ require_once("lib/Database.php");
 require_once("lib/Auth.php");
 require_once("lib/ImageManager.php");
 require_once("lib/SimpleImage.php");
+require_once("lib/ImageEditor.php");
 
 session_start();
 
@@ -40,12 +41,11 @@ if (isset($_GET["p"])) {
     <head>
     <meta charset="utf-8">
     <title>420px</title>
-    <!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> -->
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
     <link rel="stylesheet" href="//bootswatch.com/darkly/bootstrap.min.css">
     <link rel="stylesheet" href="//blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
     <link rel="stylesheet" href="public/css/bootstrap-image-gallery.min.css">
-    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="public/css/fileinput.min.css">
     <link rel="stylesheet" href="public/css/style.css">
     </head>
