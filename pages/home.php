@@ -7,7 +7,9 @@
         <div class="image-gallery">
         <?php foreach ($allImages as $image): ?>
             <div class="image-box">
-                <img src='<?php echo IMG_TARGET_FOLDER . $image->name; ?>' alt='' />
+                <a href="<?php echo IMG_TARGET_FOLDER . $image->name; ?>" title="" data-gallery>
+                    <img src="<?php echo IMG_TARGET_FOLDER . $image->name; ?>" alt="" />
+                </a>
                 <div class="details">
                     <span class="details-user-name">
                         <a href="index.php?p=imageManager&amp;user=<?php echo $image->user_id; ?>">

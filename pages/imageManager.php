@@ -37,11 +37,12 @@ else if (isset($_GET['delete_image'])) {
 
     <div class="image-box">
         <a href="<?php echo IMG_TARGET_FOLDER . $image->name; ?>" title="" data-gallery>
-            <img src="<?php echo IMG_TARGET_FOLDER . $image->name; ?>" alt=""><br>
-            <?php if ($isLogged): ?>
-                <a class="delete-image-btn" href="?p=imageManager&amp;delete_image=<?php echo $image->id; ?>">Supprimer</a>
-            <?php endif; ?>
+            <img src="<?php echo IMG_TARGET_FOLDER . $image->name; ?>" alt="">
         </a>
+        <?php if ($isLogged && $_SESSION['Auth']['userId'] == $image->user_id): ?>
+            <a class="delete-image-btn" href="?p=imageManager&amp;delete_image=<?php echo $image->id; ?>">Supprimer</a>
+        <?php endif; ?>
+
         <div class="details">
             <span class="details-user-name">
                 <a href="index.php?p=imageManager&amp;user=<?php echo $image->user_id; ?>">
