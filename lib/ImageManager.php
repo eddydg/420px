@@ -48,20 +48,23 @@ class ImageManager {
             return strlen($val) >= 2;
         });
 
-        $in = join(',', array_fill(0, count($reqList), '?'));
+        if (count($reqList) > 0) {
+            $in = join(',', array_fill(0, count($reqList), '?'));
+            try {
+                $req = $this->db->prepare(
+                    "SELECT image.id as id, user_id, name, email as username, main_color
+                    FROM image INNER JOIN user ON user.id = image.user_id
+                    WHERE email IN ($in) OR main_color IN ($in)");
+                $req->execute(array_merge($reqList, $reqList));
 
-        try {
-            $req = $this->db->prepare(
-                "SELECT image.id as id, user_id, name, email as username, main_color
-                FROM image INNER JOIN user ON user.id = image.user_id
-                WHERE email IN ($in) OR main_color IN ($in)");
-            $req->execute(array_merge($reqList, $reqList));
+                return $req->fetchAll();
 
-            return $req->fetchAll();
-
-        } catch (PDOException $e) {
-            echo "Database request failed: $e->getMesssage()";
-            exit();
+            } catch (PDOException $e) {
+                echo "Database request failed: $e->getMesssage()";
+                exit();
+            }
+        } else {
+            return $this->getImages();
         }
     }
 

@@ -8,7 +8,7 @@
     <?php
         $allImages;
         $searchKeywords = "";
-        if (isset($_GET['q'])) {
+        if (isset($_GET['q']) && $_GET['q'] != "") {
             $searchKeywords = $_GET['q'];
             $allImages = $ImageManager->findImages($searchKeywords);
         } else {
