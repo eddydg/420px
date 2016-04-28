@@ -1,10 +1,16 @@
 <?php
 require_once("config.php");
+
 require_once("lib/Database.php");
 require_once("lib/Auth.php");
 require_once("lib/ImageManager.php");
-require_once("lib/SimpleImage.php");
 require_once("lib/ImageEditor.php");
+
+require_once("lib/SimpleImage.php");
+
+require_once("lib/Color.php");
+require_once("lib/ColorExtractor.php");
+require_once("lib/Palette.php");
 
 session_start();
 

@@ -21,7 +21,7 @@ body {
 
 .image-box {
     width: 430px;
-    height: 500px;
+    height: 470px;
     margin: 5px 5px;
     padding: 5px 5px;
     position: relative;
@@ -75,7 +75,7 @@ body {
 }
 
 .image-box .delete-image-btn {
-    bottom: 75px;
+    bottom: 45px;
 }
 .image-box .edit-image-btn {
     top: 5px;
@@ -107,6 +107,7 @@ body {
     text-transform: capitalize;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #ccc;
+
 }
 
 .close {
@@ -148,4 +149,26 @@ body {
 .editor-toolbar-actions {
     position: absolute;
     bottom: 0;
+}
+
+
+.editor-palette {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.palette-color {
+    display: inline-block;
+    width: 90px;
+    height: 30px;
+    cursor: crosshair;
+}
+
+.palette-color > span {
+    opacity: 0;
+    transition: 0.2s;
+}
+.palette-color:hover > span {
+    opacity: 1;
 }

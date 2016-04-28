@@ -2,6 +2,7 @@ CREATE TABLE IF NOT EXISTS `image` (
   `id`      int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `name`    varchar(128) NOT NULL,
+  `main_color` char(6) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;

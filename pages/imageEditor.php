@@ -69,13 +69,23 @@ if (isset($_GET['edit_image'])): ?>
                 <li><a href="?p=imageEditor&amp;edit_image=<?php echo $image->id; ?>&amp;edges">Détection des contours</a></li>
                 <li><a href="?p=imageEditor&amp;edit_image=<?php echo $image->id; ?>&amp;random">Aléatoire</a></li>
             </ul>
+
             <div class="editor-toolbar-actions">
                 <a href="?p=imageEditor&amp;edit_image=<?php echo $image->id; ?>&amp;reset" class="btn btn-danger">Tout Annuler</a>
                 <a href="?p=imageEditor&amp;edit_image=<?php echo $image->id; ?>&amp;save" class="btn btn-info">Enregistrer</a>
             </div>
         </div>
+
     </div>
 
+    <div class="editor-palette">
+        <?php
+        $mainColors = ImageEditor::getMainColors($tempImage);
+        foreach($mainColors as $color) {
+            echo "<span class='palette-color' style='background-color: $color'><span>$color</span></span>";
+        }
+        ?>
+    </div>
 
 
 <?php else: ?>

@@ -12,7 +12,7 @@ class ImageManager {
     public function getImage($imageId) {
         try {
             $req = $this->db->prepare(
-                "SELECT image.id as id, user_id, name, email as username FROM image INNER JOIN user ON user.id = image.user_id WHERE image.id = ?");
+                "SELECT image.id as id, user_id, name, email as username, main_color FROM image INNER JOIN user ON user.id = image.user_id WHERE image.id = ?");
             $req->execute(array($imageId));
 
             return $req->fetch();
@@ -27,11 +27,11 @@ class ImageManager {
             if ($userId == 0) {
                 return $this->db
                     ->query(
-                        "SELECT image.id as id, user_id, name, email as username FROM image INNER JOIN user ON user.id = image.user_id")
+                        "SELECT image.id as id, user_id, name, email as username, main_color FROM image INNER JOIN user ON user.id = image.user_id")
                     ->fetchAll();
             } else {
                 $req = $this->db->prepare(
-                    "SELECT image.id as id, user_id, name, email as username FROM image INNER JOIN user ON user.id = image.user_id WHERE image.user_id = ?");
+                    "SELECT image.id as id, user_id, name, email as username, main_color FROM image INNER JOIN user ON user.id = image.user_id WHERE image.user_id = ?");
                 $req->execute(array($userId));
 
                 return $req->fetchAll();
@@ -40,14 +40,38 @@ class ImageManager {
             echo "Database request failed: $e->getMesssage()";
             exit();
         }
+    }
 
+    public function findImages($reqs) {
+        $reqList = preg_split('/\W/', $reqs, 0, PREG_SPLIT_NO_EMPTY);
+        $reqList = array_filter($reqList, function($val) {
+            return strlen($val) >= 2;
+        });
+
+        $in = join(',', array_fill(0, count($reqList), '?'));
+
+        try {
+            $req = $this->db->prepare(
+                "SELECT image.id as id, user_id, name, email as username, main_color
+                FROM image INNER JOIN user ON user.id = image.user_id
+                WHERE email IN ($in) OR main_color IN ($in)");
+            $req->execute(array_merge($reqList, $reqList));
+
+            return $req->fetchAll();
+
+        } catch (PDOException $e) {
+            echo "Database request failed: $e->getMesssage()";
+            exit();
+        }
     }
 
     public function insertImage($imageName, $userId)
     {
+        $mainColor = ImageEditor::getMainColors(IMG_TARGET_FOLDER . $imageName, 1)[0];
+        $mainColor = substr($mainColor, 1, 6);
         try {
-            $req = $this->db->prepare("INSERT INTO image (user_id, name) VALUES (?, ?)");
-            return $req->execute(array($userId, $imageName));
+            $req = $this->db->prepare("INSERT INTO image (user_id, name, main_color) VALUES (?, ?, ?)");
+            return $req->execute(array($userId, $imageName, $mainColor));
         } catch (PDOException $e) {
             echo "Database request failed: $e->getMesssage()";
             exit();

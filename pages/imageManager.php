@@ -19,6 +19,8 @@ else if (isset($_GET['delete_image'])) {
     else
         $messageError = "Vous n'êtes pas autorisé à supprimer cette image.";
 }
+
+
 ?>
 
 <div id="content">

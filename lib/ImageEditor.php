@@ -35,7 +35,15 @@ class ImageEditor {
         $image->save();
     }
 
-
+    public static function getMainColors($imagePath, $number = 5) {
+        $palette = League\ColorExtractor\Palette::fromFilename($imagePath);
+        $extractor = new League\ColorExtractor\ColorExtractor($palette);
+        $colors = array();
+        foreach ($extractor->extract($number) as $color) {
+            array_push($colors, League\ColorExtractor\Color::fromIntToHex($color));
+        }
+        return $colors;
+    }
 
 }
 
