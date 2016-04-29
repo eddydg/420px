@@ -9,6 +9,10 @@ if (isset($_GET['edit_image'])): ?>
         die();
     }
 
+    if (!file_exists(IMG_TARGET_FOLDER . 'temp/')) {
+      mkdir(IMG_TARGET_FOLDER . 'temp/', 0777, true);
+    }
+
     $tempImage = IMG_TARGET_FOLDER . 'temp/' . $image->name;
     if (isset($_GET['reset'])) {
         unlink($tempImage);
@@ -80,10 +84,12 @@ if (isset($_GET['edit_image'])): ?>
 
     <div class="editor-palette">
         <?php
+        /*
         $mainColors = ImageEditor::getMainColors($tempImage);
         foreach($mainColors as $color) {
             echo "<span class='palette-color' style='background-color: $color'><span>$color</span></span>";
         }
+        */
         ?>
     </div>
 

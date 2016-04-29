@@ -12,6 +12,7 @@ class RSSFeed {
             $result .= "<item>";
 
             $result .= "<title>" . $image->name . "</title>";
+            $result .= "<author>" . $image->username . "</author>";
             $result .= "<image><url>" . IMG_TARGET_FOLDER . $image->name . "</url></image>";
 
             $result .= "</item>";

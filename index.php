@@ -29,7 +29,8 @@ if (isset($_GET["p"])) {
     $page = $_GET["p"];
 
     if ($page == "rssFeed") {
-        header('Location: rssFeed.php');
+        $userId = isset($_GET['user']) ? "userId=" . $_GET['user'] : "";
+        header("Location: rssFeed.php?$userId");
         exit();
     }
     elseif ($page == "logout") {

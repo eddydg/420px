@@ -1,3 +1,4 @@
+<?php $userId = isset($_GET['user']) ? "&amp;user=" . $_GET['user'] : ""; ?>
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -8,7 +9,7 @@
                 <?php if ($isLogged): ?>
                 <li><a href="?p=imageManager" class="active">Gestionnaire d'images</a></li>
                 <?php endif; ?>
-                <li><a href="?p=rssFeed">Flux RSS</a></li>
+                <li><a href="?p=rssFeed<?php echo $userId; ?>">Flux RSS</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <?php if ($isLogged): ?>

@@ -5,6 +5,10 @@ require_once("lib/RSSFeed.php");
 
 $ImageManager = new ImageManager(Database::getDB());
 
-RSSFeed::saveFeed($ImageManager->getImages());
-header('Location: rss.xml');
+$userId = 0;
+if (isset($_GET['userId'])) {
+  $userId = $_GET['userId'];
+}
+header('Content-type: text/xml');
+echo RSSFeed::getFeed($ImageManager->getImages($userId));
 ?>
